@@ -24,7 +24,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		brokerURL="vm://localhost" validateConnections="true" doc:name="Active MQ" />
 	<jms:activemq-connector name="Active_MQ1"
 		brokerURL="vm://localhost" validateConnections="true" doc:name="Active MQ" />
-	<flow name="maven-projectFlow">
+	<flow name="retrieveFlights">
 		<http:listener config-ref="HTTP_Listener_Configuration"
 			path="/flights" doc:name="/flights (HTTP)" />
 		<db:select config-ref="Derby_Configuration" doc:name="SELECT * FROM FLIGHTS">
@@ -32,10 +32,11 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</db:select>
 		<dw:transform-message doc:name="Transform Message">
 			<dw:set-payload><![CDATA[%dw 1.0
-%output application/java
+%output application/json
 ---
 payload]]></dw:set-payload>
 		</dw:transform-message>
+        <set-property propertyName="#[&quot;Content-Type&quot;]" value="#[&quot;application/json&quot;]" doc:name="Property"/>
 		<jms:outbound-endpoint queue="flights"
 			connector-ref="Active_MQ" doc:name="flights" />
 	</flow>
