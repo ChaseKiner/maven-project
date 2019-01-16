@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<derby.version>10.14.2.0</derby.version>
-		<uid>ckiner</uid>
+		<uid>ckiner99</uid>
 		<pwd></pwd>
 		<mule.version>3.9.1</mule.version>
 		<activemq.version>5.11.3</activemq.version>
